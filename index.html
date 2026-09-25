@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AXIOO — laptop premium dengan desain sinematik, performa tinggi, dan aksen emas-biru yang ikonik."
+    />
+    <title>AXIOO — Cinematic Performance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="is-locked">
+    <!-- NAVBAR: disembunyikan sampai hero video selesai / di-skip -->
+    <header id="navbar" class="navbar" aria-hidden="true">
+      <a class="navbar__logo" href="#hero">AXIOO</a>
+      <button
+        class="navbar__toggle"
+        id="nav-toggle"
+        type="button"
+        aria-label="Buka menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="navbar__menu" id="nav-menu">
+        <a href="#hero">HOME</a>
+        <a href="#specs">SPECS</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#buy">BUY</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- SECTION 1: Hero cinematic video (fullscreen, play once) -->
+      <section id="hero" class="hero">
+        <video
+          id="hero-video"
+          class="hero__video"
+          src="hero.mp4"
+          muted
+          playsinline
+          autoplay
+          preload="auto"
+          aria-label="Animasi sinematik laptop AXIOO"
+        ></video>
+        <!-- Fallback canvas jika hero.mp4 belum tersedia: memutar sequence frame ±4 detik -->
+        <canvas id="hero-fallback" class="hero__fallback" aria-hidden="true"></canvas>
+
+        <div class="hero__vignette" aria-hidden="true"></div>
+
+        <button id="hero-skip" class="hero__skip" type="button">Skip</button>
+
+        <div class="hero__preload" id="preload-ui" aria-live="polite">
+          <span class="hero__preload-label">Preparing sequence</span>
+          <div class="hero__preload-track">
+            <div class="hero__preload-bar" id="preload-bar"></div>
+          </div>
+          <span class="hero__preload-pct" id="preload-pct">0%</span>
+        </div>
+
+        <div class="hero__scroll" id="scroll-hint" hidden>
+          <span>Scroll to explore</span>
+          <i class="hero__scroll-chevron" aria-hidden="true"></i>
+        </div>
+      </section>
+
+      <!-- SECTION 2: Scroll-driven image sequence (Apple-style canvas scrub) -->
+      <section id="sequence" class="sequence">
+        <div class="sequence__sticky">
+          <canvas id="sequence-canvas" class="sequence__canvas"></canvas>
+          <div class="sequence__copy">
+            <p class="eyebrow">The Reveal</p>
+            <h2 id="sequence-title">Born from light.</h2>
+            <p id="sequence-sub">Geser untuk memutar kisah AXIOO, frame demi frame.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: Spesifikasi produk -->
+      <section id="specs" class="specs">
+        <div class="container">
+          <p class="eyebrow reveal">Engineering</p>
+          <h2 class="section-title reveal">Dirancang untuk performa. Disempurnakan untuk keheningan.</h2>
+          <p class="section-lead reveal">
+            AXIOO menyatukan prosesor generasi terbaru, layar vivid, dan daya tahan yang tahan banting —
+            dalam bodi aluminium yang terasa seperti perhiasan tech.
+          </p>
+
+          <div class="specs__grid">
+            <article class="spec-card reveal">
+              <span class="spec-card__icon" aria-hidden="true">◆</span>
+              <h3>Prosesor</h3>
+              <p class="spec-card__value">Intel® Core™ Ultra 7</p>
+              <p>AI boost on-device, multithreaded kencang untuk render, coding, dan multitasking berat.</p>
+            </article>
+            <article class="spec-card reveal">
+              <span class="spec-card__icon" aria-hidden="true">◇</span>
+              <h3>Memori</h3>
+              <p class="spec-card__value">16 GB LPDDR5X</p>
+              <p>Bandwidth tinggi, hemat daya — aplikasi tetap snappy meski puluhan tab terbuka.</p>
+            </article>
+            <article class="spec-card reveal">
+              <span class="spec-card__icon" aria-hidden="true">▣</span>
+              <h3>Storage</h3>
+              <p class="spec-card__value">512 GB NVMe SSD</p>
+              <p>Boot dalam hitungan detik. Transfer file besar tanpa drama.</p>
+            </article>
+            <article class="spec-card reveal">
+              <span class="spec-card__icon" aria-hidden="true">▢</span>
+              <h3>Layar</h3>
+              <p class="spec-card__value">14" 2.8K OLED</p>
+              <p>120 Hz, 100% DCI-P3, HDR — warna yang hidup seperti splash di layar cinematic.</p>
+            </article>
+            <article class="spec-card reveal">
+              <span class="spec-card__icon" aria-hidden="true">◎</span>
+              <h3>Baterai</h3>
+              <p class="spec-card__value">70 Wh · USB-C PD</p>
+              <p>Seharian berkarya. Isi daya cepat lewat Thunderbolt™ 4.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: Galeri dengan parallax ringan -->
+      <section id="gallery" class="gallery">
+        <div class="container">
+          <p class="eyebrow reveal">Gallery</p>
+          <h2 class="section-title reveal">Setiap sudut, satu pernyataan.</h2>
+        </div>
+        <div class="gallery__stage" id="gallery-stage">
+          <!-- Gambar diisi via getFramePath() di script.js — tidak ada path hardcode -->
+        </div>
+      </section>
+
+      <!-- SECTION 5: CTA beli -->
+      <section id="buy" class="cta">
+        <div class="cta__glow" aria-hidden="true"></div>
+        <div class="container cta__inner">
+          <p class="eyebrow reveal">AXIOO</p>
+          <h2 class="section-title reveal">Saatnya memiliki yang sinematik.</h2>
+          <p class="section-lead reveal">
+            Laptop premium made to be seen — dan dibuat untuk bekerja tanpa kompromi.
+          </p>
+          <p class="cta__price reveal">Mulai <strong>Rp 12.999.000</strong></p>
+          <a class="btn btn--gold reveal" href="https://axioo.com" target="_blank" rel="noopener noreferrer">
+            Beli Sekarang
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <div class="container footer__grid">
+        <div>
+          <p class="navbar__logo footer__brand">AXIOO</p>
+          <p class="footer__tag">Cinematic performance. Everyday precision.</p>
+        </div>
+        <div>
+          <h3>Kontak</h3>
+          <p>Jakarta, Indonesia</p>
+          <p><a href="mailto:hello@axioo.com">hello@axioo.com</a></p>
+          <p><a href="tel:+622150008900">+62 21 5000 8900</a></p>
+        </div>
+        <div>
+          <h3>Sosial</h3>
+          <ul class="footer__social">
+            <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer__copy">
+        <p>© <span id="year"></span> AXIOO. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
